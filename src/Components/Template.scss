@@ -1,0 +1,21 @@
+.div-template {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto; //width가 주어진 상황에서 좌우정렬.
+    margin-top: 10px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.div-template-title {
+    background: #7F669D;
+    color: #FBFACD;
+    height: 4rem;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.div-template-content {
+    background: white;
+}

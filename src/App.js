@@ -1,25 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Template from './Components/Template'
+import InputList from './Components/InputList'
+import Item from './Components/Item'
+import List from './Components/List'
+const App = () => {
+  return( 
+    <Template>
+      <InputList/>
+      <List />
+    </Template>
+  )
+};
 
 export default App;
