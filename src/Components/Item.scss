@@ -1,0 +1,39 @@
+.div-Item{
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+}
+
+.div-checkbox{
+    cursor: pointer;
+    flex: 1;//영역 
+    svg{//아이콘
+        font-size: 1.3rem;
+    }
+    .div-text{
+        margin-left:0.5em;
+        font-size: 1rem;
+    }
+    &.checked {
+        .div-text{
+            color: #969090;
+            text-decoration: line-through;
+        }
+    }
+}
+
+.remove{
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #ff6b6b;
+    cursor: pointer;
+    &:hover{
+        color: #ff8787;
+    }
+    & + & {
+        border-top: 1px solid #000000;
+    }
+}
+

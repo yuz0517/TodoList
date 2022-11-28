@@ -1,5 +1,6 @@
 import React from 'react';
-import { BiCircle, BiCheckCircle} from 'react-icons/bi'
+import { BiCircle, BiCheckCircle, BiMinusCircle} from 'react-icons/bi'
+import './Item.scss'
 const Item = () => {
     return(
         <div className='div-Item'>
@@ -8,7 +9,7 @@ const Item = () => {
                 <div className='div-text'>할 일</div>
             </div>
             <div className='remove'>
-                <BiCheckCircle></BiCheckCircle>
+                <BiMinusCircle/>
             </div>
         </div>
     );
