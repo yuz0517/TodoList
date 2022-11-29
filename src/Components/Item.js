@@ -1,7 +1,8 @@
 import React from 'react';
 import { BiCircle, BiCheckCircle, BiMinusCircle} from 'react-icons/bi'
 import './Item.scss'
-const Item = () => {
+const Item = (todo) => {
+    const { text, checked } = todo;
     return(
         <div className='div-Item'>
             <div className='div-checkbox'>

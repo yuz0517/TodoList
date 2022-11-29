@@ -1,13 +1,12 @@
 import React from 'react';
 import Item from './Item';
 import './List.scss'
-const List = () => {
+const List = ({ tasks }) => {
     return(
         <div className='div-List'>
-            <Item/>
-            <Item/>
-            <Item/>
-
+            {tasks.map(task => (
+                <Item task={task} key={task.id} />
+            ))}
         </div>
     )
 }

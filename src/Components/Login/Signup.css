@@ -1,0 +1,126 @@
+
+.div-all{
+    background-color: #ffffff;
+    width:80%;
+    place-content:center;
+    flex-direction: column;
+    margin: auto;
+    display: grid;
+}
+
+.div-title{
+    margin-top: 50px;
+    margin-bottom: 50px;;
+}
+.div-passwordcheck, .div-checkid{
+    font-size: 11px;
+    margin-top: none;
+    height: 35px;
+}
+
+.p-login{
+    font-size: 18px;
+}
+.p-id{
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.p-password, .p-nickname, .p-address{
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.p-passwordcheck-null, .p-checkid-null{
+    color: #8d8d8d;
+}
+
+.p-passwordcheck-false, .p-checkid-false{
+    color: red;
+}
+
+.p-passwordcheck-true, .p-checkid-true{
+    color: blue
+}
+
+.input-password, .input-nickname, .input-signup-address1 {
+    width: 400px;
+    height: 50px;
+    margin-bottom: 35px;
+    
+}
+.input-signup-address {
+    width: 350px;
+    height: 50px;
+    margin-bottom: 6px;
+    border-radius: 0%;
+    border: 1px solid #7b7b7b;
+    
+    
+}
+.input-password-check, .input-id{
+    width: 400px;
+    height: 50px;
+    margin-bottom: 5px;
+    
+}
+.button-signup-address{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #7b7b7b;
+    border-left: none;
+    background: #ffffff;
+    border-radius: 0%;
+}
+.button-signup-address::before{
+    font-size:10px ;
+    content: "🔍 ";
+}
+.button-signup-address:hover::before{
+    font-size:10px ;
+    content: "click";
+}
+
+.button-register{
+    width: 300px;
+    height: 50px;
+    background-color: aqua;
+    color: black;
+    border: 1px solid aqua;
+    border-radius: 50%;
+    font-size: 12px;
+    margin-top: 5px;
+    
+
+}
+.button-register::before{
+    content: "회원가입"
+}
+.button-register:hover{
+    transition: 0.7s;
+    background-color:#f9ff90;
+    border: 1px solid #f9ff90;
+    
+}
+.button-register:enabled:hover:before{
+    color: blue;
+    content:"💞 환 영 합 니 다 💞";
+    font-size: 13px;
+}
+.button-register:disabled {
+    color: rgb(133, 132, 132);
+    background-color: rgb(214, 211, 211);
+    border: none;
+}
+
+
+
+
+
+
+.div-button{
+    place-content: center;
+   
+    display: flex;
+
+}

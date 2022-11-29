@@ -1,0 +1,48 @@
+.div-all{
+    background-color: #ffffff;
+    width:80%;
+    place-content:center;
+    flex-direction: column;
+    margin: auto;
+    display: grid;
+}
+.div-title{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.div-signin-button{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+}
+
+.p-login{
+    font-size: 18px;
+}
+.p-id{
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.p-password{
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.input-signin-id, .input-signin-password{
+    width: 400px;
+    height: 50px;
+    margin-bottom: 35px;
+}
+
+.button-signin,.button-signup{
+    width: 150px;
+    height: 50px;
+    background-color: aqua;
+    color: black;
+    border: 1px solid aqua;
+    border-radius: 50%;
+    font-size: 12px;
+    
+}
+
