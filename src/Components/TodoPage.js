@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Template from './Template';
 import InputList from './InputList';
 import Logout from './Login/Logout';
@@ -32,12 +32,24 @@ const TodoPage = () => {
       checked: false,
     },
   ]);
+  const nextId = useRef(4)
+
+  const onInsert = useCallback(
+    text => {
+      const task = {
+        id: nextId.current,
+        text,
+        checked: false,
+      };
+      setTasks(tasks.concat(task)); //Tasks 배열 뒤에 연결.
+      nextId.current += 1;
+    },[tasks],);
 
   return (
     <div>
       <Logout />
       <Template>
-        <InputList></InputList>
+        <InputList onInsert={onInsert}></InputList>{/* oninsert함수 자체를 InputList로 전달하는 코드 */}
         <List tasks={tasks} /> {/*props로 전달 */}
       </Template>
     </div>
