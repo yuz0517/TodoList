@@ -32,10 +32,24 @@ const TodoPage = () => {
       checked: false,
     },
   ]);
-  const nextId = useRef(4)
+  const nextId = useRef(4);
+  const onDone = useCallback( id => 
+    {setTasks(
+      tasks.map(task =>
+        task.id === id ? { ...task, checked: !task.checked } : task
+      ),
+    );
+
+  }, [tasks]);
+  const onRemove = useCallback(
+    (id) => {
+      setTasks(tasks.filter((task) => task.id !== id));
+    },
+    [tasks],
+  );
 
   const onInsert = useCallback(
-    text => {
+    (text) => {
       const task = {
         id: nextId.current,
         text,
@@ -43,14 +57,17 @@ const TodoPage = () => {
       };
       setTasks(tasks.concat(task)); //Tasks 배열 뒤에 연결.
       nextId.current += 1;
-    },[tasks],);
+    },
+    [tasks],
+  );
 
   return (
     <div>
       <Logout />
       <Template>
-        <InputList onInsert={onInsert}></InputList>{/* oninsert함수 자체를 InputList로 전달하는 코드 */}
-        <List tasks={tasks} /> {/*props로 전달 */}
+        <InputList onInsert={onInsert}></InputList>
+        {/* oninsert함수 자체를 InputList로 전달하는 코드 */}
+        <List tasks={tasks} onRemove={onRemove} onDone={onDone} /> {/*props로 전달 */}
       </Template>
     </div>
   );
