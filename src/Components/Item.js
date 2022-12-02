@@ -21,4 +21,4 @@ const Item = ({task, onRemove, onDone}) => {
     );
 };
 
-export default Item;
+export default React.memo(Item);
