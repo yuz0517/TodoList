@@ -1,22 +1,41 @@
-import React, { useCallback, useState } from 'react';
+import { collection, getDocs, getFirestore, addDoc } from 'firebase/firestore';
+import { db } from "../firebase"
+import React, { useCallback, useEffect, useState } from 'react';
 import { IoIosAdd } from 'react-icons/io';
 import './InputList.scss';
 
 const InputList = ({ onInsert }) => {
-    const [Input, setInput] = useState("");
-    const onInputChange = useCallback(e => {
-        setInput(e.target.value);
-    },[])
+  const [Input, setInput] = useState('');
+  const onInputChange = useCallback((e) => {
+    setInput(e.target.value);
+  }, []);
 
-    const onTaskSubmit = useCallback(
-        e => {
-            onInsert(Input)//현재 Input값을 props로 받아온 onInsert함수에 넣어서 호출함.
-            setInput("")//위에서 값을 배열에 넣어줬으니 Input값을 초기화시켜줌!
-            e.preventDefault(); //이 코드는 submit이벤트가 브라우저에서 새로고침을 유발하기 때문에 방지하기 위해 호출한 함수임.
-        },[onInsert,Input])
+  const user = sessionStorage.key(0)// 이메일
+
+  const [todos, setTodos] = useState([]);
+  const todoCollectionRef = collection(db,"todos");
+
+  useEffect(() => {
+    const getTodos = async () => {
+      const data = await getDocs(todoCollectionRef);
+      setTodos(data.docs.map((doc) => ({...doc.data(), id:doc.id})));
+    }
+    getTodos();
+
+  }, []);
+  console.log(todos);
+  const onTaskSubmit = useCallback(
+    (e) => {
+     
+      onInsert(Input); //현재 Input값을 props로 받아온 onInsert함수에 넣어서 호출함.
+      setInput(''); //위에서 값을 배열에 넣어줬으니 Input값을 초기화시켜줌!
+      e.preventDefault(); //이 코드는 submit이벤트가 브라우저에서 새로고침을 유발하기 때문에 방지하기 위해 호출한 함수임.
+    },
+    [onInsert, Input],
+  );
   return (
     <form className="InputList" onSubmit={onTaskSubmit}>
-        {/* onSubmit으로 처리한 이유는 사실 밑의 button-task-add 에 onclick을 사용할 수 있었는데,
+      {/* onSubmit으로 처리한 이유는 사실 밑의 button-task-add 에 onclick을 사용할 수 있었는데,
         onSubmit으로 처리하면 이 곳에서 엔터가 눌렸을 경우 이 이벤트가 발생하기 때문에  */}
       <input
         className="input-task"
@@ -27,7 +46,12 @@ const InputList = ({ onInsert }) => {
       <button className="button-task-add">
         <IoIosAdd />
       </button>
+      <div>
+  
+
+    </div>
     </form>
+
   );
 };
 
