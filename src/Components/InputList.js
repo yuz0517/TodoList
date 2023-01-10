@@ -1,8 +1,9 @@
-import { collection, getDocs, getFirestore, addDoc } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, addDoc, Timestamp } from 'firebase/firestore';
 import { db } from "../firebase"
 import React, { useCallback, useEffect, useState } from 'react';
 import { IoIosAdd } from 'react-icons/io';
 import './InputList.scss';
+import { FirebaseError } from 'firebase/app';
 
 const InputList = ({ onInsert }) => {
   const [Input, setInput] = useState('');
@@ -21,12 +22,27 @@ const InputList = ({ onInsert }) => {
       setTodos(data.docs.map((doc) => ({...doc.data(), id:doc.id})));
     }
     getTodos();
-
+    
   }, []);
   console.log(todos);
+  
+  async function addTodo(){
+    try {
+      const docRef = await addDoc(todoCollectionRef, {
+        date: 19980517 ,
+        isCompleted: false,
+        task: "677",
+        useID: user,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
+
   const onTaskSubmit = useCallback(
     (e) => {
-     
+      addTodo();
       onInsert(Input); //현재 Input값을 props로 받아온 onInsert함수에 넣어서 호출함.
       setInput(''); //위에서 값을 배열에 넣어줬으니 Input값을 초기화시켜줌!
       e.preventDefault(); //이 코드는 submit이벤트가 브라우저에서 새로고침을 유발하기 때문에 방지하기 위해 호출한 함수임.
