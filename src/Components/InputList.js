@@ -1,4 +1,4 @@
-import { collection, getDocs, getFirestore, addDoc, Timestamp } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, addDoc, Timestamp, Firestore } from 'firebase/firestore';
 import { db } from "../firebase"
 import React, { useCallback, useEffect, useState } from 'react';
 import { IoIosAdd } from 'react-icons/io';
@@ -29,9 +29,9 @@ const InputList = ({ onInsert }) => {
   async function addTodo(){
     try {
       const docRef = await addDoc(todoCollectionRef, {
-        date: 19980517 ,
+        date: Firestore.Timestamp,
         isCompleted: false,
-        task: "677",
+        task: Input,
         useID: user,
       });
       console.log("Document written with ID: ", docRef.id);
