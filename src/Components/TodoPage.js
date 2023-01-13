@@ -4,7 +4,7 @@ import InputList from './InputList';
 import Logout from './Login/Logout';
 import List from './List';
 import { db } from './../firebase.js'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, getDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -16,6 +16,22 @@ const TodoPage = () => {
       checked: false,
     },
   ]);
+
+  const todoCollectionRef = collection(db,"todos");
+  async function getTodo(){
+    try {
+      const docSnap = await getDoc(todoCollectionRef)
+      if (docSnap.exists()) {
+        //console.log("Document data:", docSnap.data());
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+      
+    }catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
   function getMovies() {
     const getDB = collection(db, 'todos');
     getDocs(getDB)

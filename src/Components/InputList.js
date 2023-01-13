@@ -1,10 +1,9 @@
-import { collection, getDocs, getFirestore, addDoc, Timestamp, Firestore } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, addDoc,  Firestore, Timestamp, updateDoc, serverTimestamp, getDoc } from 'firebase/firestore';
 import { db } from "../firebase"
 import React, { useCallback, useEffect, useState } from 'react';
 import { IoIosAdd } from 'react-icons/io';
 import './InputList.scss';
 import { FirebaseError } from 'firebase/app';
-
 const InputList = ({ onInsert }) => {
   const [Input, setInput] = useState('');
   const onInputChange = useCallback((e) => {
@@ -26,10 +25,25 @@ const InputList = ({ onInsert }) => {
   }, []);
   console.log(todos);
   
+  // async function getTodo(){
+  //   try {
+  //     const docSnap = await getDoc(todoCollectionRef)
+  //     if (docSnap.exists()) {
+  //       console.log("Document data:", docSnap.data());
+  //     } else {
+  //       // doc.data() will be undefined in this case
+  //       console.log("No such document!");
+  //     }
+      
+  //   }catch (e) {
+  //     console.error("Error adding document: ", e);
+  //   }
+  // }
   async function addTodo(){
     try {
+    
       const docRef = await addDoc(todoCollectionRef, {
-        date: Firestore.Timestamp,
+        date: serverTimestamp(),
         isCompleted: false,
         task: Input,
         useID: user,
