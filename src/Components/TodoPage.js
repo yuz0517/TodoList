@@ -16,21 +16,16 @@ const TodoPage = () => {
       checked: false,
     },
   ]);
-  const [task , setTask]
+
+
+  const [todos, setTodos] = useState([]);
   const todoCollectionRef = collection(db,"todos");
-  async function getTodo(){
-    try {
-      const docSnap = await getDoc(todoCollectionRef)
-      if (docSnap.exists()) {
-        //console.log("Document data:", docSnap.data());
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-      
-    }catch (e) {
-      console.error("Error adding document: ", e);
-    }
+  const getTodos = async () => {
+    const data = await getDocs(todoCollectionRef);
+    //setTodos(data.docs.map((doc) => ({...doc.data(), id:doc.id})));
+    setTasks(
+      (data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,id) => (v,v[id].date,false))
+    )
   }
   function getMovies() {
     const getDB = collection(db, 'todos');
@@ -43,22 +38,23 @@ const TodoPage = () => {
   }
   
   const navigate = useNavigate();
+
   useEffect(() => {
+    getTodos(); // firestore로부터 온 데이터
     getMovies();
-    console.log( getMovies());
+    
     // setTasks(
     //   tasks.map((task) =>
     //     task.id === id ? { ...task, checked: !task.checked } : task,
     //   ),
-    // setTasks(tasks && tasks.map((task)=> task.text=(getMovies())))
-    // if (sessionStorage.length === 0) {
-    //   console.log(sessionStorage.length);
-    //   navigate('/');
-    // }
-    console.log("db done",tasks)
+   
+    if (sessionStorage.length === 0) {
+      console.log(sessionStorage.length);
+      navigate('/');
+  }
     return () => {};
   }, []);
-
+  console.log(tasks)
   
   const nextId = useRef(0);
   const onDone = useCallback(

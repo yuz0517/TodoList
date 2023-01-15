@@ -12,22 +12,22 @@ const InputList = ({ onInsert }) => {
 
   const user = sessionStorage.key(0)// 이메일
 
-  const [todos, setTodos] = useState([]);
-  const todoCollectionRef = collection(db,"todos");
-
-  useEffect(() => {
-    const getTodos = async () => {
-      const data = await getDocs(todoCollectionRef);
-      setTodos(data.docs.map((doc) => ({...doc.data(), id:doc.id})));
-    }
-    getTodos();
+   const [todos, setTodos] = useState([]);
+   const todoCollectionRef = collection(db,"todos");
+  // const getTodos = async () => {
+  // //   const data = await getDocs(todoCollectionRef);
+  // //   setTodos(data.docs.map((doc) => ({...doc.data(), id:doc.id})));
+  // // }
+  // useEffect(() => {
     
-  }, []);
-  console.log(todos[1].task);
-  
-  // async function getTodo(){
+  //   getTodos();
+
+  // }, []);
+
+  //console.log(todos);
+  // async function getTodo(){ //오류낫음
   //   try {
-  //     const docSnap = await getDoc(todoCollectionRef)
+  //     const docSnap = await getDoc(CollectionRef)
   //     if (docSnap.exists()) {
   //       console.log("Document data:", docSnap.data());
   //     } else {
@@ -56,6 +56,7 @@ const InputList = ({ onInsert }) => {
 
   const onTaskSubmit = useCallback(
     (e) => {
+      
       addTodo();
       onInsert(Input); //현재 Input값을 props로 받아온 onInsert함수에 넣어서 호출함.
       setInput(''); //위에서 값을 배열에 넣어줬으니 Input값을 초기화시켜줌!
