@@ -23,7 +23,7 @@ const InputList = ({ onInsert }) => {
     getTodos();
     
   }, []);
-  console.log(todos);
+  console.log(todos[1].task);
   
   // async function getTodo(){
   //   try {

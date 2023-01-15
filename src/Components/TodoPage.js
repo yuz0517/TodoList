@@ -16,7 +16,7 @@ const TodoPage = () => {
       checked: false,
     },
   ]);
-
+  const [task , setTask]
   const todoCollectionRef = collection(db,"todos");
   async function getTodo(){
     try {
@@ -45,11 +45,17 @@ const TodoPage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     getMovies();
-    if (sessionStorage.length === 0) {
-      console.log(sessionStorage.length);
-      navigate('/');
-    }
-
+    console.log( getMovies());
+    // setTasks(
+    //   tasks.map((task) =>
+    //     task.id === id ? { ...task, checked: !task.checked } : task,
+    //   ),
+    // setTasks(tasks && tasks.map((task)=> task.text=(getMovies())))
+    // if (sessionStorage.length === 0) {
+    //   console.log(sessionStorage.length);
+    //   navigate('/');
+    // }
+    console.log("db done",tasks)
     return () => {};
   }, []);
 
