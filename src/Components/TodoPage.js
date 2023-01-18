@@ -18,14 +18,27 @@ const TodoPage = () => {
   ]);
 
 
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([
+    {
+      taskid: '',
+      text: '',
+      checked: false,
+    }
+  ]);
   const todoCollectionRef = collection(db,"todos");
   const getTodos = async () => {
     const data = await getDocs(todoCollectionRef);
+    console.log(data.docs.map((doc) => ({...doc.data(), id:doc.id}))  );
     //setTodos(data.docs.map((doc) => ({...doc.data(), id:doc.id})));
-    setTasks(
-      (data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,id) => (v,v[id].date,false))
-    )
+    const defaultdatalength = (data.docs.map((doc) => ({...doc.data(), id:doc.id}))).length;
+    setTasks((data.docs.map((doc) => ({...doc.data(), id:doc.id}))))
+    setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})),false);
+    // for (var i = 0; i <defaultdatalength; i++){
+    //   tasks[i].taskid.push(i);
+    // }
+    //console.log((data.docs.map((doc) => ({...doc.data(), id:doc.id})))[0].task)
+    //(data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v) => (false )
+
   }
   function getMovies() {
     const getDB = collection(db, 'todos');
@@ -43,7 +56,7 @@ const TodoPage = () => {
     getTodos(); // firestore로부터 온 데이터
     getMovies();
     
-    // setTasks(
+     // setTasks(
     //   tasks.map((task) =>
     //     task.id === id ? { ...task, checked: !task.checked } : task,
     //   ),
@@ -54,9 +67,9 @@ const TodoPage = () => {
   }
     return () => {};
   }, []);
-  console.log(tasks)
+  console.log(todos)
   
-  const nextId = useRef(0);
+  const nextId = useRef(0);//바꿔주기
   const onDone = useCallback(
     (id) => {
       setTasks(
