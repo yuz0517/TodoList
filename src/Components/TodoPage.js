@@ -26,20 +26,15 @@ const TodoPage = () => {
     }
   ]);
   const todoCollectionRef = collection(db,"todos");
+  
   const getTodos = async () => {
     const data = await getDocs(todoCollectionRef);
-    console.log(data.docs.map((doc) => ({...doc.data(), id:doc.id}))  );
-    //setTodos(data.docs.map((doc) => ({...doc.data(), id:doc.id})));
-    const defaultdatalength = (data.docs.map((doc) => ({...doc.data(), id:doc.id}))).length;
-    setTasks((data.docs.map((doc) => ({...doc.data(), id:doc.id}))))
+    //console.log(data.docs.map((doc) => ({...doc.data(), id:doc.id}))  );
+    const defaultdatalength = (data.docs.map((doc) => ({...doc.data(), id:doc.id}))).length; //firestore로 불러온 데이터의 길이
     setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})),false);
-    // for (var i = 0; i <defaultdatalength; i++){
-    //   tasks[i].taskid.push(i);
-    // }
-    //console.log((data.docs.map((doc) => ({...doc.data(), id:doc.id})))[0].task)
-    //(data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v) => (false )
-
+    console.log(todos)
   }
+
   function getMovies() {
     const getDB = collection(db, 'todos');
     getDocs(getDB)
@@ -69,16 +64,16 @@ const TodoPage = () => {
   }, []);
   console.log(todos)
   
-  const nextId = useRef(0);//바꿔주기
+  const nextId = useRef(11);//바꿔주기
   const onDone = useCallback(
-    (id) => {
-      setTasks(
-        tasks.map((task) =>
-          task.id === id ? { ...task, checked: !task.checked } : task,
+    (taskid) => {
+      setTodos(
+        todos.map((todo) =>
+          todo.taskid === taskid ? { ...todo, isCompleted: !todo.isCompleted } : todo,
         ),
       );
     },
-    [tasks],
+    [todos],
   );
   const onRemove = useCallback(
     (id) => {
@@ -106,7 +101,7 @@ const TodoPage = () => {
       <Template>
         <InputList onInsert={onInsert}></InputList>
         {/* oninsert함수 자체를 InputList로 전달하는 코드 */}
-        <List tasks={tasks} onRemove={onRemove} onDone={onDone} />{' '}
+        <List todos={todos} onRemove={onRemove} onDone={onDone} />{' '}
         {/*props로 전달 */}
       </Template>
     </div>
