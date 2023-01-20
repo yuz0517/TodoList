@@ -4,7 +4,7 @@ import InputList from './InputList';
 import Logout from './Login/Logout';
 import List from './List';
 import { db } from './../firebase.js'
-import { collection, getDocs, getDoc } from 'firebase/firestore'
+import { collection, getDocs, getDoc, Timestamp } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -21,17 +21,23 @@ const TodoPage = () => {
   const [todos, setTodos] = useState([
     {
       taskid: '',
-      text: '',
-      checked: false,
+      task: '',
+      useID: '',
+      isCompleted: false,
     }
   ]);
   const todoCollectionRef = collection(db,"todos");
-  
+  var todaySecond = (new Date()).slice(4,11);
+  //todaySecond = todaySecond.substr(4,11);
+  var length = 0;
   const getTodos = async () => {
     const data = await getDocs(todoCollectionRef);
     //console.log(data.docs.map((doc) => ({...doc.data(), id:doc.id}))  );
     const defaultdatalength = (data.docs.map((doc) => ({...doc.data(), id:doc.id}))).length; //firestore로 불러온 데이터의 길이
-    setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})),false);
+    length = defaultdatalength;
+    console.log(todaySecond);
+    setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})).filter(
+      todo => (todo.date.seconds).substr(4,11) !==   (todaySecond)));
     console.log(todos)
   }
 
@@ -64,6 +70,7 @@ const TodoPage = () => {
   }, []);
   console.log(todos)
   
+  
   const nextId = useRef(11);//바꿔주기
   const onDone = useCallback(
     (taskid) => {
@@ -76,23 +83,23 @@ const TodoPage = () => {
     [todos],
   );
   const onRemove = useCallback(
-    (id) => {
-      setTasks(tasks.filter((task) => task.id !== id));
+    (taskid) => {
+      setTodos(todos.filter((todo) => todo.taskid !== taskid));
     },
-    [tasks],
+    [todos],
   );
 
   const onInsert = useCallback(
-    (text) => {
-      const task = {
-        id: nextId.current,
-        text,
-        checked: false,
+    (task) => {
+      const todo = {
+        taskid: nextId.current,
+        task,
+        isCompleted: false,
       };
-      setTasks(tasks.concat(task)); //Tasks 배열 뒤에 연결.
+      setTodos(todos.concat(todo)); //Tasks 배열 뒤에 연결.
       nextId.current += 1;
     },
-    [tasks],
+    [todos],
   );
 
   return (
