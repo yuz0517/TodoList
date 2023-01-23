@@ -27,17 +27,18 @@ const TodoPage = () => {
     }
   ]);
   const todoCollectionRef = collection(db,"todos");
-  var todaySecond = (new Date()).slice(4,11);
-  //todaySecond = todaySecond.substr(4,11);
+  var todaysDate= (new Date()).slice(4,11);
+  
   var length = 0;
   const getTodos = async () => {
     const data = await getDocs(todoCollectionRef);
     //console.log(data.docs.map((doc) => ({...doc.data(), id:doc.id}))  );
     const defaultdatalength = (data.docs.map((doc) => ({...doc.data(), id:doc.id}))).length; //firestore로 불러온 데이터의 길이
     length = defaultdatalength;
-    console.log(todaySecond);
+    console.log(todaysDate);
+    //setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})))
     setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})).filter(
-      todo => (todo.date.seconds).substr(4,11) !==   (todaySecond)));
+      todo => (todo.date.seconds).toString().slice(4,11) !==   (todaysDate)));
     console.log(todos)
   }
 
