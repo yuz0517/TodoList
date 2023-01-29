@@ -21,13 +21,14 @@ const TodoPage = () => {
   const [todos, setTodos] = useState([
     {
       taskid: '',
+      date: {nanoseconds: '', seconds:''},
       task: '',
       useID: '',
       isCompleted: false,
     }
   ]);
   const todoCollectionRef = collection(db,"todos");
-  var todaysDate= (new Date()).slice(4,11);
+  var todaysDate= (new Date()).toString().slice(4,15);
   
   var length = 0;
   const getTodos = async () => {
@@ -36,10 +37,16 @@ const TodoPage = () => {
     const defaultdatalength = (data.docs.map((doc) => ({...doc.data(), id:doc.id}))).length; //firestore로 불러온 데이터의 길이
     length = defaultdatalength;
     console.log(todaysDate);
-    //setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})))
-    setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})).filter(
-      todo => (todo.date.seconds).toString().slice(4,11) !==   (todaysDate)));
-    console.log(todos)
+    setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})))
+    // setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})).filter(
+    //    todo => (todo.date).toString().slice(4,11) !==   (todaysDate)));
+    //console.log(Date(todos[5].date.seconds).toString().slice(4,15))
+    //console.log(todos.filter(todo => Date(todo.date.seconds).toString().slice(4,15) === (todaysDate)))
+    
+    const result = (todos.filter((todo) => Date(todo.date.seconds).toString().includes(todaysDate)))
+   
+
+    console.log(result)
   }
 
   function getMovies() {
