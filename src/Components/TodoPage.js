@@ -27,8 +27,10 @@ const TodoPage = () => {
       isCompleted: false,
     }
   ]);
+
   const todoCollectionRef = collection(db,"todos");
   var todaysDate= (new Date()).toString().slice(4,15);
+
   
   var length = 0;
   const getTodos = async () => {
@@ -36,17 +38,27 @@ const TodoPage = () => {
     //console.log(data.docs.map((doc) => ({...doc.data(), id:doc.id}))  );
     const defaultdatalength = (data.docs.map((doc) => ({...doc.data(), id:doc.id}))).length; //firestore로 불러온 데이터의 길이
     length = defaultdatalength;
-    console.log(todaysDate);
-    setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})))
+    const datetime = new Date().getDate() ;
+    const newtodos=((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index}))
+    .filter(todo => (todo.useID) == sessionStorage.key(0)))//현재 로그인한 사용자별로 필터링.
+
+    console.log(Date(newtodos[1].date.seconds).slice(4,15))
+
+    var todayDate= (new Date()).toString().slice(4,15);
+    //const newnewtodos = newtodos.filter(todo => (todo.date.seconds) >=  (new Date("01/31/2023").getTime()/1000)  )
+    const newnewtodos = newtodos.filter(todo => (todo.date.seconds) >=  (((new Date().getMonth() + 1) + "/" + (new Date().getDate()) +"/"+(new Date().getFullYear())).getTime()/1000)  )
+    //console.log(newDate)
+    //const newtodos = todos.filter((todo) => Date(todo.date.seconds).toString().includes("Jan 31"))
+   // console.log("todos",newtodos);
     // setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})).filter(
     //    todo => (todo.date).toString().slice(4,11) !==   (todaysDate)));
     //console.log(Date(todos[5].date.seconds).toString().slice(4,15))
     //console.log(todos.filter(todo => Date(todo.date.seconds).toString().slice(4,15) === (todaysDate)))
     
-    const result = (todos.filter((todo) => Date(todo.date.seconds).toString().includes(todaysDate)))
-   
+    //setTodos(todos.filter((todo) => Date(todo.date.seconds).toString().includes(todaysDate)))
+    
 
-    console.log(result)
+    console.log(todos)
   }
 
   function getMovies() {
@@ -76,9 +88,16 @@ const TodoPage = () => {
   }
     return () => {};
   }, []);
+  //const newtodos = todos.filter((todo) => Date(todo.date.seconds).toString().includes("Jan 29"))
+  //const newtodos = todos.filter((todo) => Date(todo.task).includes("1월"))
+
+
+  //console.log("includes",todos.filter((todo) => (todo.task).includes("1월"))) //정상적으로 표시
+  //console.log("includes",todos.filter((todo) => (Date(todo.date.seconds).slice(4,15)).toLowerCase().includes('Jan 31'))) //정상적으로 표시
+  //console.log(todaysDate.includes("Jan"))
   console.log(todos)
   
-  
+
   const nextId = useRef(11);//바꿔주기
   const onDone = useCallback(
     (taskid) => {
