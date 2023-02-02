@@ -15,7 +15,10 @@
         margin-left:0.5em;
         font-size: 1rem;
     }
-    &.checked {
+    &.isCompleted {
+        svg {
+            color: #db90f6 
+        }
         .div-text{
             color: #969090;
             text-decoration: line-through;

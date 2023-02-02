@@ -5,7 +5,7 @@ import cn from 'classnames';//조건부 스타일링을 위해 classnames 사용
 import { IoMdCheckboxOutline } from 'react-icons/io';
 const Item = ({todo, onRemove, onDone}) => {
     const { taskid, task, isCompleted } = todo;
-    console.log(task)
+    //console.log(task)
     return(
         <div className='div-Item'>
             <div className={cn('div-checkbox',{ isCompleted })}

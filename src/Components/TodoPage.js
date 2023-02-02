@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Template from './Template';
 import InputList from './InputList';
 import Logout from './Login/Logout';
-import Calendar from 'react-calendar';
+import TodoCalendar from './TodoCalendar';
 import List from './List';
 import { db } from './../firebase.js';
 import {
@@ -35,6 +35,16 @@ const TodoPage = () => {
     },
   ]);
 
+  const [usertodos, setuserTodos] = useState([
+    {
+      taskid: '',
+      date: { nanoseconds: '', seconds: '' },
+      task: '',
+      useID: '',
+      isCompleted: false,
+    },
+  ]);
+
   const todoCollectionRef = collection(db, 'todos');
   var todaysDate = new Date().toString().slice(4, 15);
 
@@ -52,7 +62,7 @@ const TodoPage = () => {
       .map((doc) => ({ ...doc.data(), id: doc.id }))
       .map((v, index) => ({ ...v, taskid: index }))
       .filter((todo) => todo.useID == sessionStorage.key(0)); //현재 로그인한 사용자별로 필터링.
-
+    setuserTodos(firestoretodos);
     console.log(Date(firestoretodos[1].date.seconds).slice(4, 15));
 
     //var todayDate= (new Date()).toString().slice(4,15);
@@ -69,17 +79,14 @@ const TodoPage = () => {
       (todo) => todo.date.seconds >= todaydate,
     );
     setTodos(newtodos);
-    //console.log(newDate)
-    //const newtodos = todos.filter((todo) => Date(todo.date.seconds).toString().includes("Jan 31"))
-    // console.log("todos",newtodos);
-    // setTodos((data.docs.map((doc) => ({...doc.data(), id:doc.id}))).map((v,index) => ({...v, taskid:index})).filter(
-    //    todo => (todo.date).toString().slice(4,11) !==   (todaysDate)));
-    //console.log(Date(todos[5].date.seconds).toString().slice(4,15))
-    //console.log(todos.filter(todo => Date(todo.date.seconds).toString().slice(4,15) === (todaysDate)))
-
-    //setTodos(todos.filter((todo) => Date(todo.date.seconds).toString().includes(todaysDate)))
-
-    console.log(todos);
+    
+    const schedule = require('node-schedule');
+    var j = schedule.scheduleJob('25 13 ? * 0-6', function(){
+      //usertodos.filter( todo => )
+      console.log('매일 1시 25분에 실행');
+    });
+   
+      
   };
 
   function getMovies() {
@@ -166,7 +173,7 @@ const TodoPage = () => {
 
   return (
     <div>
-      <Calendar />
+      
       <Logout />
       <Template>
         <InputList onInsert={onInsert}></InputList>
@@ -174,6 +181,7 @@ const TodoPage = () => {
         <List todos={todos} onRemove={onRemove} onDone={onDone} />{' '}
         {/*props로 전달 */}
       </Template>
+      <TodoCalendar usertodos = {usertodos}/>
     </div>
   );
 };

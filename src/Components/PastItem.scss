@@ -1,0 +1,11 @@
+.div-past-todo {
+    margin-left: 0.5em;
+    font-size: 1rem;
+
+    &.isCompleted {
+        .div-past-todo-text {
+            
+            text-decoration: line-through;
+        }
+    }
+}
