@@ -3,6 +3,7 @@ import moment from 'moment';
 import Calendar from 'react-calendar';
 import Pasttodos from './Pasttodos';
 import { IoCloseCircleOutline } from 'react-icons/io5';
+import { BsToggleOff } from 'react-icons/bs'
 //import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 const TodoCalendar = ({ usertodos }) => {
@@ -51,33 +52,40 @@ const TodoCalendar = ({ usertodos }) => {
     console.log('selecttodos ,', selecttodos, visible);
   };
   return (
-    <div className = 'div-todocalendar-full'>
-      <div className='div-calendar'>
-      <Calendar
-        onChange={handleDateChange}
-        value={value}
-        className={'react-calendar'}
-        locale="en-EN"
+    <div className="div-todocalendar-full">
+      <div className="div-calendar">
+        <Calendar
+          onChange={handleDateChange}
+          value={value}
+          className={'react-calendar'}
+          locale="en-EN"
 
-        //formatDay={(locale, date) => moment(date).format("DD")}
-      />
-      </div>
-      <div className='div-calendar-todo'>
-        {visible && (
-          <IoCloseCircleOutline
-            className='icon-close'
-            onClick={() => {
-              setVisible(!visible);
-            }}
-          />  
-        )}
-        {visible && (
-          <Pasttodos
-            selecteddate={value}
-            selecttodos={selectedtodos}
-            isalldone={alldone}
-          />
-        )}
+          //formatDay={(locale, date) => moment(date).format("DD")}
+        />
+      </div>  
+      < div className='div-past'>
+
+        <div>✶ 나의 지난 기록들 ✶</div>
+
+        <BsToggleOff className='icon-toggle'
+        /> 
+        <div className="div-calendar-todo">
+          {visible && (
+            <IoCloseCircleOutline
+              className="icon-close"
+              onClick={() => {
+                setVisible(!visible);
+              }}
+            />
+          )}
+          {visible && (
+            <Pasttodos
+              selecteddate={value}
+              selecttodos={selectedtodos}
+              isalldone={alldone}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

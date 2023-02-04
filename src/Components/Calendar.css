@@ -1,11 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+.div-past{
+  text-align: center;
+  flex-direction: column;
+  cursor: pointer;
+  color: rgb(34, 34, 34);
+  font-size: 1.1rem;
+  font-family: 'Nanum Gothic', sans-serif;
+
+}
+.icon-toggle{
+  font-size: 1.4rem;
+}
+
 .icon-close {
-  height: 1.5rem;
-  width: auto;
-  color: #757575;
+  margin-top: 5;
+  height: 1.4rem;
+  width: 1.4rem;
+  color: rgb(34, 34, 34);
+  cursor: pointer;
 }
 .div-todocalendar-full {
   display: flex;
   margin: 10px;
+}
+.div-calendar-todo{
+  font-size: 0.8rem;
 }
 
 .react-calendar {
