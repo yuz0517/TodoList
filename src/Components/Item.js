@@ -1,8 +1,9 @@
 import React from 'react';
-import { BiCircle, BiCheckCircle, BiMinusCircle} from 'react-icons/bi'
+import { BiCircle, BiCheckCircle, BiTrash} from 'react-icons/bi'
+import { IoTrash } from 'react-icons/io'
 import './Item.scss'
 import cn from 'classnames';//조건부 스타일링을 위해 classnames 사용. 
-import { IoMdCheckboxOutline } from 'react-icons/io';
+
 const Item = ({todo, onRemove, onDone}) => {
     const { taskid, task, isCompleted } = todo;
     //console.log(task)
@@ -15,7 +16,7 @@ const Item = ({todo, onRemove, onDone}) => {
                 <div className='div-text'>{task}</div>
             </div>
             <div className='remove' onClick={() => onRemove(taskid)} >  
-                <BiMinusCircle/>
+                <BiTrash/>
             </div>
         </div>
     );

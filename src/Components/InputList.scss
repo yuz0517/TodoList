@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400&family=Indie+Flower&display=swap');
 .InputList {
     display: flex;
     background: #ffffff;
     .input-task {
-        
+        font-family: 'Gaegu', cursive;
         outline: none;
         border: none;
         padding: 0.5rem;

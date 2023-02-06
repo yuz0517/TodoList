@@ -70,7 +70,7 @@ const InputList = ({ onInsert }) => {
         onSubmit으로 처리하면 이 곳에서 엔터가 눌렸을 경우 이 이벤트가 발생하기 때문에  */}
       <input
         className="input-task"
-        placeholder="🍀일정을 입력하세요"
+        placeholder="✨ Please enter your schedule ✨"
         onChange={onInputChange}
         value={Input}
       />

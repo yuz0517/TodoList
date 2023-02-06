@@ -6,7 +6,7 @@ const PastItem = ({todo}) => {
    console.log(isCompleted);
   return (
     <div className={cn('div-past-todo',{ isCompleted })}>
-       <div className='div-past-todo-text'> {task}</div>
+       <div className='div-past-todo-text'>  ✧ {task}</div>
     </div>
   )
 }

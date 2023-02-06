@@ -4,6 +4,7 @@ import InputList from './InputList';
 import Logout from './Login/Logout';
 import TodoCalendar from './TodoCalendar';
 import List from './List';
+import Slider from './Slider';
 import { db } from './../firebase.js';
 import {
   collection,
@@ -175,6 +176,7 @@ const TodoPage = () => {
     <div>
       
       <Logout />
+      <Slider/>
       <Template>
         <InputList onInsert={onInsert}></InputList>
         {/* oninsert함수 자체를 InputList로 전달하는 코드 */}

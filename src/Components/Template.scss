@@ -1,18 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400&family=Indie+Flower&display=swap');
 .div-template {
     width: 80%;
     margin-left: auto;
     margin-right: auto; //width가 주어진 상황에서 좌우정렬.
     margin-top: 0px;
-    border-radius: 4px;
-    border: 2px solid #45cb64;
-    padding: 10px
+    border-radius: 30px;
+    border: 2px solid #161816;
+    padding: 10px;
+    font-family: 'Gaegu', cursive;
+    
 }
 
 .div-template-title {
     background: #ffffff;
-    color: #45cb64;
+    color: #2f2f2f;
     height: 4rem;
-    font-size: 19px;
+    font-size: 29px;
     display: flex;
     align-items: center;//세로 중앙 정렬
     justify-content: center;
@@ -21,4 +24,6 @@
 
 .div-template-content {
     background: white;
+    background-image: url("../assets/grid_2.png");
+    background-repeat: repeat;
 }
