@@ -6,6 +6,8 @@ import TodoCalendar from './TodoCalendar';
 import List from './List';
 import Slider from './Slider';
 import { db } from './../firebase.js';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   collection,
   getDocs,
@@ -82,9 +84,20 @@ const TodoPage = () => {
     setTodos(newtodos);
     
     const schedule = require('node-schedule');
-    var j = schedule.scheduleJob('25 13 ? * 0-6', function(){
-      //usertodos.filter( todo => )
-      console.log('매일 1시 25분에 실행');
+    // const j = schedule.scheduleJob('10 * * * * *, function() {
+    //   console.log("매 10초마다 실행");
+    // });
+    //var j = schedule.scheduleJob(' ? * 0-6', function(){
+    //const schedule = require('node-schedule');
+    var scheduleF5 = schedule.scheduleJob('3600 * * * * *', function(){
+      //한 시간마다 한 번씩 실행. 
+      const remaintime = 24-Number(new Date().getHours())
+      toast.dark('내일까지 '+remaintime+'시간 남았습니다! 오늘 계획한 일들을 모두 끝내봅시다! 화이팅 💪', {
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 7000,
+        hideProgressBar: false,
+      });
+      console.log('1시간마다 실행');
     });
    
       
@@ -184,6 +197,7 @@ const TodoPage = () => {
         {/*props로 전달 */}
       </Template>
       <TodoCalendar usertodos = {usertodos}/>
+      <ToastContainer />
     </div>
   );
 };
