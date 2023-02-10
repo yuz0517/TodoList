@@ -89,6 +89,16 @@ const TodoPage = () => {
     // });
     //var j = schedule.scheduleJob(' ? * 0-6', function(){
     //const schedule = require('node-schedule');
+    var scheduleRemain = schedule.scheduleJob('3600 * * * * *', function(){
+      //한 시간마다 한 번씩 실행. 
+      const remaintime = 24-Number(new Date().getHours())
+      toast.dark('내일까지 '+remaintime+'시간 남았습니다! 오늘 계획한 일들을 모두 끝내봅시다! 화이팅 💪', {
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 7000,
+        hideProgressBar: false,
+      });
+      console.log('1시간마다 실행');
+    });
     var scheduleF5 = schedule.scheduleJob('3600 * * * * *', function(){
       //한 시간마다 한 번씩 실행. 
       const remaintime = 24-Number(new Date().getHours())
