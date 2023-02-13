@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+//import icon_1 from './icon_1.png';
 import './App.css';
 import Template from './Components/Template'
 import InputList from './Components/InputList'

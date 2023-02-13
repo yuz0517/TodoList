@@ -8,6 +8,8 @@ import Slider from './Slider';
 import { db } from './../firebase.js';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './TodoPage.scss';
+import icon from '../assets/icon_1.png';
 import {
   collection,
   getDocs,
@@ -18,6 +20,7 @@ import {
   doc,
 } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import Copyright from './Copyright';
 
 const TodoPage = () => {
   const [tasks, setTasks] = useState([
@@ -66,10 +69,8 @@ const TodoPage = () => {
       .map((v, index) => ({ ...v, taskid: index }))
       .filter((todo) => todo.useID == sessionStorage.key(0)); //현재 로그인한 사용자별로 필터링.
     setuserTodos(firestoretodos);
-    console.log(Date(firestoretodos[1].date.seconds).slice(4, 15));
+    //console.log(Date(firestoretodos[1].date.seconds).slice(4, 15));
 
-    //var todayDate= (new Date()).toString().slice(4,15);
-    //const newnewtodos = newtodos.filter(todo => (todo.date.seconds) >=  (new Date("01/31/2023").getTime()/1000)  )
     let todaydate =
       new Date().getMonth() +
       1 +
@@ -82,42 +83,50 @@ const TodoPage = () => {
       (todo) => todo.date.seconds >= todaydate,
     );
     setTodos(newtodos);
-    
+
     const schedule = require('node-schedule');
     // const j = schedule.scheduleJob('10 * * * * *, function() {
     //   console.log("매 10초마다 실행");
     // });
     //var j = schedule.scheduleJob(' ? * 0-6', function(){
     //const schedule = require('node-schedule');
-    var scheduleRemain = schedule.scheduleJob('3600 * * * * *', function(){
-      //한 시간마다 한 번씩 실행. 
-      const remaintime = 24-Number(new Date().getHours())
-      toast.dark('내일까지 '+remaintime+'시간 남았습니다! 오늘 계획한 일들을 모두 끝내봅시다! 화이팅 💪', {
-        position: toast.POSITION.BOTTOM_CENTER,
-        autoClose: 7000,
-        hideProgressBar: false,
-      });
-      console.log('1시간마다 실행');
+    var scheduleRemain = schedule.scheduleJob('3600 * * * * *', function () {
+      //한 시간마다 한 번씩 실행.
+      const remaintime = 24 - Number(new Date().getHours());
+      toast.dark(
+        '내일까지 ' +
+          remaintime +
+          '시간 남았습니다! 오늘 계획한 일들을 모두 끝내봅시다! 화이팅 💪',
+        {
+          position: toast.POSITION.BOTTOM_CENTER,
+          autoClose: 7000,
+          hideProgressBar: false,
+        },
+      );
+      //console.log('1시간마다 실행');
     });
-    var scheduleF5 = schedule.scheduleJob('3600 * * * * *', function(){
-      //한 시간마다 한 번씩 실행. 
-      const remaintime = 24-Number(new Date().getHours())
-      toast.dark('내일까지 '+remaintime+'시간 남았습니다! 오늘 계획한 일들을 모두 끝내봅시다! 화이팅 💪', {
-        position: toast.POSITION.BOTTOM_CENTER,
-        autoClose: 7000,
-        hideProgressBar: false,
-      });
-      console.log('1시간마다 실행');
+    var scheduleF5 = schedule.scheduleJob('3600 * * * * *', function () {
+      //한 시간마다 한 번씩 실행.
+      const remaintime = 24 - Number(new Date().getHours());
+      toast.dark(
+        '내일까지 ' +
+          remaintime +
+          '시간 남았습니다! 오늘 계획한 일들을 모두 끝내봅시다! 화이팅 💪',
+        {
+          position: toast.POSITION.BOTTOM_CENTER,
+          autoClose: 7000,
+          hideProgressBar: false,
+        },
+      );
+      //console.log('1시간마다 실행');
     });
-   
-      
   };
 
   function getMovies() {
     const getDB = collection(db, 'todos');
     getDocs(getDB)
       .then((response) => {
-        console.log(response);
+        //console.log(response);
       })
       .catch((error) => console.log(error.message));
   }
@@ -134,13 +143,13 @@ const TodoPage = () => {
     //   ),
 
     if (sessionStorage.length === 0) {
-      console.log(sessionStorage.length);
+      //console.log(sessionStorage.length);
       navigate('/');
     }
     return () => {};
   }, []);
 
-  console.log(todos);
+  //console.log(todos);
 
   const nextId = useRef(todos.length); //바꿔주기
 
@@ -150,10 +159,10 @@ const TodoPage = () => {
       await updateDoc(todoCollectionRef, {
         isCompleted: false,
       });
-    }else if (updatetask.isCompleted === false) {
+    } else if (updatetask.isCompleted === false) {
       await updateDoc(todoCollectionRef, {
         isCompleted: true,
-      })
+      });
     }
   };
   const onDone = useCallback(
@@ -196,18 +205,21 @@ const TodoPage = () => {
   );
 
   return (
-    <div>
-      
+    <div className="div-full">
       <Logout />
-      <Slider/>
+
+      <div className="div-logo-doit">
+        <img src={icon} alt="logo" className="image-logo-doit" />
+      </div>
       <Template>
         <InputList onInsert={onInsert}></InputList>
         {/* oninsert함수 자체를 InputList로 전달하는 코드 */}
         <List todos={todos} onRemove={onRemove} onDone={onDone} />{' '}
         {/*props로 전달 */}
       </Template>
-      <TodoCalendar usertodos = {usertodos}/>
+      <TodoCalendar className="div-todocalendar" usertodos={usertodos} />
       <ToastContainer />
+      <Copyright/>
     </div>
   );
 };

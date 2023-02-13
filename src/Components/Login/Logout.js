@@ -1,8 +1,8 @@
 import React from 'react';
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { GrLogout } from 'react-icons/gr'
-import './Logout.css'
+import { BiLogOut } from 'react-icons/bi'
+import './Logout.scss'
 const Logout = () => {
     const auth = getAuth();
     const navigate = useNavigate();
@@ -14,9 +14,9 @@ const Logout = () => {
         
     return (
         <div className='div-logout-full'>
-            <button className='button-logout' onClick={logout}>
-            <GrLogout/>
-            </button>
+            
+            <BiLogOut className = 'icon-logout-icon' onClick={logout} size='26'/>
+           
         </div>
     )
 

@@ -2,7 +2,7 @@ import React from 'react';
 import Item from './Item';
 import './List.scss'
 const List = ({ todos, onRemove, onDone }) => {
-    console.log("list.js",todos)
+    //console.log("list.js",todos)
     return(
         <div className='div-List'>
             {todos.map(todo => (

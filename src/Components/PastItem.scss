@@ -4,8 +4,12 @@
 
     &.isCompleted {
         .div-past-todo-text {
-            
+            color: #edeeef;
             text-decoration: line-through;
         }
     }
+}
+
+.div-past-todo-text{
+    color:#c7dcf2;
 }

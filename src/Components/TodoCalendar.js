@@ -34,8 +34,8 @@ const TodoCalendar = ({ usertodos }) => {
     onChange(value);
     const selectdate = moment(value).format('MM/DD/YYYY');
     const selectdate_seconds = new Date(selectdate).getTime() / 1000;
-    console.log(selectdate_seconds);
-    console.log(`The selected Date is ${value.toDateString()}`);
+    //console.log(selectdate_seconds);
+    //console.log(`The selected Date is ${value.toDateString()}`);
 
     const selecttodos = usertodos.filter(
       (todo) =>
@@ -52,14 +52,14 @@ const TodoCalendar = ({ usertodos }) => {
     setalldone(isalldone);
     setVisible(true);
     setrecordVisible(true);
-    console.log(isalldone);
-    console.log('selecttodos ,', selecttodos, visible);
+    //console.log(isalldone);
+    //console.log('selecttodos ,', selecttodos, visible);
   };
   return (
     <div className="div-todocalendar-full">
       
       <div className="div-past">
-        <div>✶ 나의 지난 기록들 ✶</div>
+        <div>✶ My Journal ✶</div>
 
         {recordvisible ? (
           <BsToggleOn

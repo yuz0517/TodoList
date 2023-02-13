@@ -15,7 +15,7 @@ const Slider = () => {
             <div className="Slider-wrapper">
                 <div className="Slider-view">
                     <div className="Slider-item">
-                        ssdf
+                        
                     </div>
                 </div>
             </div>
