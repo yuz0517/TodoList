@@ -4,7 +4,7 @@ import PastItem from './PastItem'
 import './Pasttodos.scss'
 
 const Pasttodos = ({selecteddate,selecttodos,isalldone}) => {
-    let isdonetext = isalldone ? ' ❤︎ Congrats! you completed all tasks. 🏅' : '✘ You unabled to complete the lists. 😢' 
+    let isdonetext = isalldone ? ' ❤︎ Congrats! you completed all your tasks. 🏅' : '✘ You unabled to complete the lists. 😢' 
     //console.log(selecteddate  )
     if(selecttodos.length===0) 
         isdonetext = new Date(selecteddate).getFullYear()+'년 '+

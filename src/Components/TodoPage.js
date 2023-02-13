@@ -56,6 +56,9 @@ const TodoPage = () => {
 
   var length = 0;
   const getTodos = async () => {
+    
+
+
     const data = await getDocs(todoCollectionRef);
 
     const defaultdatalength = data.docs.map((doc) => ({
@@ -190,6 +193,13 @@ const TodoPage = () => {
     },
     [todos],
   );
+
+  console.log("   .-.         _  .-. ")
+  console.log("   : :        :_;.' `.")
+  console.log(" .-' : .--.   .-.`. .'")
+  console.log("' .; :' .; :  : : : : ")
+  console.log("`.__.'`.__.'  :_; :_; ")
+                                             
 
   const onInsert = useCallback(
     (task) => {

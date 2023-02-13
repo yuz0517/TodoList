@@ -59,7 +59,7 @@ const TodoCalendar = ({ usertodos }) => {
     <div className="div-todocalendar-full">
       
       <div className="div-past">
-        <div>✶ My Journal ✶</div>
+        <div>✶ My Journals ✶</div>
 
         {recordvisible ? (
           <BsToggleOn
