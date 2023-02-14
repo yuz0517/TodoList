@@ -23,10 +23,10 @@ const App = () => {
   ]);
   return( 
 <>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
-        <Route path='/' element={<Signin />}/>
-        <Route path='/todo' element={<TodoPage />}/>
+        <Route exact path='/' element={<Signin />}/>
+        <Route exact path='/todo' element={<TodoPage />}/>
         <Route path='/Signup' element={<Signup />}/>
       </Routes>
     </BrowserRouter>

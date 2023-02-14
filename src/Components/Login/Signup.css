@@ -2,7 +2,7 @@
 
 .div-all{
     background-color: #202125;
-
+    min-height: 100vh;
     place-content:center;
     flex-direction: column;
     margin: auto;
