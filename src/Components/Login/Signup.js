@@ -99,9 +99,9 @@ const Signup = () => {
 
                 <div className='div-title'>
 
-                    <p className='p-login'>회원가입</p>
+                    <p className='p-login'>✦ Sign up</p>
                 </div>
-                <p className='p-id'>아이디 ( 이메일 형식으로 입력 해 주세요. )</p>
+                <p className='p-id'>ID ( Please enter your email )</p>
                 <input
                     className='input-id'
                     placeholder='id ( email )'
@@ -121,7 +121,7 @@ const Signup = () => {
                 </div>
 
 
-                <p className='p-password'>비밀번호</p>
+                <p className='p-password'>Password</p>
                 <input
                     type="password"
                     className='input-password'

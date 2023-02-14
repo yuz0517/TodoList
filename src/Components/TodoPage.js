@@ -194,11 +194,8 @@ const TodoPage = () => {
     [todos],
   );
 
-  console.log("   .-.         _  .-. ")
-  console.log("   : :        :_;.' `.")
-  console.log(" .-' : .--.   .-.`. .'")
-  console.log("' .; :' .; :  : : : : ")
-  console.log("`.__.'`.__.'  :_; :_; ")
+    console.log("%c Do iT", "color: yellow; font-weight: bold; font-size: 30px; text-shadow: 0px 2px 2px blue, 0 4px 4px white")
+
                                              
 
   const onInsert = useCallback(

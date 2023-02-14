@@ -4,9 +4,10 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from 'react';
 import { auth } from "../../firebase";//파베
 import { getAuth } from "firebase/auth";
+import { toast , ToastContainer} from 'react-toastify';
 import { Link, Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import icon from '../../assets/icon_1.png';
 import './Signin.css'
 //sign in 
 
@@ -41,26 +42,40 @@ const Signin = () => {
             navigate('/todo');
 
         } catch (error) {
+            
             console.log(error.message);
+            let errorCode = error.code;// error.code 이거로 해야 토스트가 뜸. 
+            //let errorMessage = error.message; //error메세지로 하면 안 뜸. 
+            console.log(errorCode);
+            if (errorCode === "auth/wrong-password") {
+                toast.error("잘못된 비밀번호입니다. 다시 입력 해 주세요.", { position: "top-center", });
+            } else if (errorCode === "auth/user-not-found") {
+                toast.error("가입되지 않은 이메일입니다. 이메일을 다시 확인 해 주세요.", { position: "top-center", });
+            } else if (errorCode === "auth/invalid-email") {
+                toast.error("아이디를 이메일 형식으로 입력 해 주세요.", { position: "top-center", });
+            }
 
         }
     }
 
     return (
-        <>
-            <div className='div-all'>
-                <div className='div-title'>
-                    <p className='p-login'>로그인</p>
+        <div className='div-signin-all'>
+                <div className='div-info' >
+                    <p className='p-myowntodo'> My own daily To-do list, </p>
+                    <img className='img-signin-icon'src={icon} width='40px' height='40px'></img>
                 </div>
-                <div>
-                    <p className='p-id'>아이디 ( 이메일 형식 )</p>
+                <div className='div-login-title'>
+                    <p className='p-login'>✧ LOGIN</p>
+                </div>
+                <div className='div-signin-form'>
+                    <p className='p-id'>❇︎ID</p>
                     <input
                         className='input-signin-id'
                         placeholder='Email'
                         onChange={(e) => { setLoginEmail(e.target.value); }}
                     
                     />
-                    <p className='p-password'>비밀번호</p>
+                    <p className='p-password'>❇︎Password</p>
                     <input
                         className='input-signin-password'
                         placeholder="Password"
@@ -79,8 +94,9 @@ const Signin = () => {
                         <button className='button-signup'>Sign Up</button>
                     </Link>
                 </div>
-            </div>
-        </>
+                <ToastContainer />
+          
+        </div>
     )
 }
 

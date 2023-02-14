@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap');
 
 .div-all{
-    background-color: #ffffff;
-    width:80%;
+    background-color: #202125;
+
     place-content:center;
     flex-direction: column;
     margin: auto;
@@ -19,15 +20,21 @@
 }
 
 .p-login{
+    font-family: 'Source Code Pro', monospace;
+    color: #c7dcf2;
     font-size: 18px;
 }
 .p-id{
-    font-size: 10px;
+    font-family: 'Source Code Pro', monospace;
+    color: #c7dcf2;
+    font-size: 12px;
     margin-bottom: 5px;
 }
 
 .p-password, .p-nickname, .p-address{
-    font-size: 10px;
+    font-family: 'Source Code Pro', monospace;
+    color: #c7dcf2;
+    font-size: 12px;
     margin-bottom: 5px;
 }
 
@@ -36,11 +43,11 @@
 }
 
 .p-passwordcheck-false, .p-checkid-false{
-    color: red;
+    color: rgb(255, 162, 162);
 }
 
 .p-passwordcheck-true, .p-checkid-true{
-    color: blue
+    color: rgb(0, 255, 255)
 }
 
 .input-password, .input-nickname, .input-signup-address1 {
@@ -49,33 +56,14 @@
     margin-bottom: 35px;
     
 }
-.input-signup-address {
-    width: 350px;
-    height: 50px;
-    margin-bottom: 6px;
-    border-radius: 0%;
-    border: 1px solid #7b7b7b;
-    
-    
-}
+
 .input-password-check, .input-id{
     width: 400px;
     height: 50px;
     margin-bottom: 5px;
     
 }
-.button-signup-address{
-    width: 50px;
-    height: 50px;
-    border: 1px solid #7b7b7b;
-    border-left: none;
-    background: #ffffff;
-    border-radius: 0%;
-}
-.button-signup-address::before{
-    font-size:10px ;
-    content: "🔍 ";
-}
+
 .button-signup-address:hover::before{
     font-size:10px ;
     content: "click";
@@ -84,12 +72,14 @@
 .button-register{
     width: 300px;
     height: 50px;
-    background-color: aqua;
+    background-color: #dc86f4;
     color: black;
-    border: 1px solid aqua;
+    border: 1px solid #dc86f4;
     border-radius: 50%;
     font-size: 12px;
     margin-top: 5px;
+    margin-bottom: 30px;
+    cursor: pointer;
     
 
 }
@@ -103,8 +93,10 @@
     
 }
 .button-register:enabled:hover:before{
+    font-family: 'Source Code Pro', monospace;
+    
     color: blue;
-    content:"💞 환 영 합 니 다 💞";
+    content:"💞 w e l c o m e 💞";
     font-size: 13px;
 }
 .button-register:disabled {
