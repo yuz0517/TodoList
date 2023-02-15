@@ -56,9 +56,6 @@ const TodoPage = () => {
 
   var length = 0;
   const getTodos = async () => {
-    
-
-
     const data = await getDocs(todoCollectionRef);
 
     const defaultdatalength = data.docs.map((doc) => ({
@@ -194,9 +191,10 @@ const TodoPage = () => {
     [todos],
   );
 
-    console.log("%c Do iT", "color: yellow; font-weight: bold; font-size: 30px; text-shadow: 0px 2px 2px blue, 0 4px 4px white")
-
-                                             
+  console.log(
+    '%c Do iT',
+    'color: yellow; font-weight: bold; font-size: 30px; text-shadow: 0px 2px 2px blue, 0 4px 4px white',
+  );
 
   const onInsert = useCallback(
     (task) => {
@@ -224,9 +222,13 @@ const TodoPage = () => {
         <List todos={todos} onRemove={onRemove} onDone={onDone} />{' '}
         {/*props로 전달 */}
       </Template>
-      <TodoCalendar className="div-todocalendar" usertodos={usertodos} />
+      <TodoCalendar
+        className="div-todocalendar"
+        usertodos={usertodos}
+        getTodos={getTodos}
+      />
       <ToastContainer />
-      <Copyright/>
+      <Copyright />
     </div>
   );
 };
