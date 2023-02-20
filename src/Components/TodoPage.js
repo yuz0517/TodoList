@@ -226,6 +226,7 @@ const TodoPage = () => {
         className="div-todocalendar"
         usertodos={usertodos}
         getTodos={getTodos}
+        todos = {todos}
       />
       <ToastContainer />
       <Copyright />

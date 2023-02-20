@@ -9,7 +9,7 @@ import { BsToggleOff, BsToggleOn } from 'react-icons/bs';
 
 //import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
-const TodoCalendar = ({ usertodos, getTodos }) => {
+const TodoCalendar = ({ usertodos, getTodos, todos }) => {
   // 조건부 렌더링
   // const Closeicon = () => {
 
@@ -30,6 +30,7 @@ const TodoCalendar = ({ usertodos, getTodos }) => {
   //console.log(value);
   const [visible, setVisible] = useState(false);
   const [recordvisible, setrecordVisible] = useState(false);
+  const [refresh,setRefresh] = useState(false)
   // const handleCloseChange = (e) => {
   //   setVisible(!visible);
   // }
@@ -39,7 +40,7 @@ const TodoCalendar = ({ usertodos, getTodos }) => {
     const forUpdate = useCallback(() => updateState({}), []);
   }
   const handleDateChange = (value) => {
-    console.log(value);
+    //console.log(value);
     onChange(value);
     setselectdate( moment(value).format('MM/DD/YYYY'));
     
@@ -67,8 +68,8 @@ const TodoCalendar = ({ usertodos, getTodos }) => {
     setalldone(isalldone);
     setVisible(true);
     setrecordVisible(true);
-  },[value]) //usestate: []안의 state가 변경되면 이 코드 실행해주세요!
-
+  },[value,todos,refresh]) //usestate: []안의 state가 변경되면 이 코드 실행해주세요!
+  
   return (
     <div className="div-todocalendar-full">
       <div className="div-past">
@@ -86,6 +87,7 @@ const TodoCalendar = ({ usertodos, getTodos }) => {
             className="icon-toggle"
             onClick={() => {
               setrecordVisible(!recordvisible);
+              
             }}
           />
         )}
@@ -97,16 +99,18 @@ const TodoCalendar = ({ usertodos, getTodos }) => {
                 value={value}
                 className={'react-calendar'}
                 locale="en-EN"
-
+          
                 //formatDay={(locale, date) => moment(date).format("DD")}
               />
               <IoMdRefresh
-                className="icon-reload"
+                className="icon-refresh"
                 onClick={() => {
+
                   //window.location.reload()
-                  
+                  setRefresh(!refresh)
+              
                   // useEffect(() => {
-                   onChange(new Date());
+                   //onChange(new Date());
                    getTodos();
                   // const selectdate = moment(value).format('MM/DD/YYYY');
                   // const selectdate_seconds =
@@ -141,6 +145,7 @@ const TodoCalendar = ({ usertodos, getTodos }) => {
                   className="icon-close"
                   onClick={() => {
                     setVisible(!visible);
+                    
                   }}
                 />
               )}
